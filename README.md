@@ -1,6 +1,6 @@
 # SES フィードバック通知 to Slack (SNS / Lambda)
 
-このプロジェクトは、Amazon SES から発生する **バウンス（送信失敗）** および **苦情（Complaint）** 通知を  
+Amazon SES から発生する **バウンス（送信失敗）** および **苦情（Complaint）** 通知を  
 Slack に自動で送信する AWS Lambda 関数です。
 バウンスと苦情以外の通知はエラーになり、通知されません。
 AWS SAM によって構築されています。
