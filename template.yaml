@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  ses-feedback-to-slack
+
+Globals:
+  Function:
+    Timeout: 3
+    MemorySize: 512
+    LoggingConfig:
+      LogFormat: JSON
+
+Resources:
+  SesFeedbackFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: ses-feedback-to-slack
+      CodeUri: app/
+      Handler: app.lambda_handler
+      Runtime: ruby3.4
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: ""
+
+Outputs:
+  SesFeedbackFunction:
+    Description: SES Feedback Lambda Function ARN
+    Value: !GetAtt SesFeedbackFunction.Arn
