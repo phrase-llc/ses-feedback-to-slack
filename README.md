@@ -46,7 +46,7 @@ AWS SAM によって構築されています。
 ```
 
 #### 本番環境
-Lambda 本番環境の環境変数に以下を設定
+デプロイ成功後に Lambda 本番環境の環境変数に以下を設定
 
 | 変数名               | 説明                           |
 |-------------------|------------------------------|
@@ -147,7 +147,7 @@ sam local invoke --event events/complaint.json --env-vars .env.json
 
 ## 🧪 単体テスト
 
-モックを使っているので Slack に通知は行きません。
+モックを使っているので Slack に通知は届きません。
 
 ```bash
 ruby test/app_test.rb
