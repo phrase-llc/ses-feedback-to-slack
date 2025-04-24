@@ -24,22 +24,29 @@ end
 def bounce_text(message, raw_message)
   bounced_recipients = message['bounce']['bouncedRecipients']
   bounce_info = bounced_recipients.map do |recipient|
-    "📩 #{recipient['emailAddress']} \n(#{recipient['status']}, #{recipient['diagnosticCode']})"
+    "#{recipient['emailAddress']} (#{recipient['status']}, #{recipient['diagnosticCode']})"
   end.join("\n")
 
-  slack_message = {
-    text: "🛎️ *バウンス通知*\n#{bounce_info}\n```#{raw_message.truncate(2800)}```"
-  }
+  build_slack_message(message: "❌ *不達/Bounce* #{bounce_info}", raw_message:)
 end
 
 def complaint_text(message, raw_message)
   complained_recipients = message['complaint']['complainedRecipients']
   complaint_info = complained_recipients.map do |recipient|
-    "📩 #{recipient['emailAddress']}"
+    "#{recipient['emailAddress']}"
   end.join("\n")
 
-  slack_message = {
-    text: "🚨 *苦情（Complaint）通知*\n#{complaint_info}\n```#{raw_message.truncate(2800)}```"
+  build_slack_message(message: "🚨 *苦情/Complaint* #{complaint_info}", raw_message:)
+end
+
+def build_slack_message(message:, raw_message:)
+  show_raw = ENV.fetch('SHOW_RAW_JSON', 'true')
+
+  slack_text = message
+  slack_text += "\n```#{raw_message.truncate(2800)}```" if show_raw == 'true'
+
+  {
+    text: slack_text
   }
 end
 

@@ -23,6 +23,7 @@ Resources:
       Environment:
         Variables:
           SLACK_WEBHOOK_URL: ""
+          SHOW_RAW_JSON: "false"
 
 Outputs:
   SesFeedbackFunction:
