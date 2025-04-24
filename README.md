@@ -40,7 +40,8 @@ AWS SAM によって構築されています。
 ```json
 {
   "Parameters": {
-    "SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/XXXX/YYYY/ZZZZ"
+    "SLACK_WEBHOOK_URL": "https://hooks.slack.com/services/XXXX/YYYY/ZZZZ",
+    "SHOW_RAW_JSON": "false"
   }
 }
 ```
@@ -48,9 +49,10 @@ AWS SAM によって構築されています。
 #### 本番環境
 デプロイ成功後に Lambda 本番環境の環境変数に以下を設定
 
-| 変数名               | 説明                           |
-|-------------------|------------------------------|
-| SLACK_WEBHOOK_URL | Slack の Incoming Webhook URL |
+| 変数名               | 説明                               |
+|-------------------|----------------------------------|
+| SLACK_WEBHOOK_URL | Slack の Incoming Webhook URL     |
+| SHOW_RAW_JSON     | "true" にするとSESから受け取ったJSONをそのまま出力 |
 
 > `.env.json` はローカル実行専用、本番には適用されません。
 
@@ -160,18 +162,15 @@ ruby test/app_test.rb
 バウンス通知：
 
 ```
-🛎️ バウンス通知
-📩 user@example.com
-(5.1.1, smtp; 550 5.1.1 user unknown)
-{JSONをそのまま出力}
+❌ 不達/Bounce user@example.com (5.1.1, smtp; 550 5.1.1 user unknown)
+{SHOW_RAW_JSONがtrueならJSONをそのまま出力}
 ```
 
 苦情通知：
 
 ```
-🚨 苦情（Complaint）通知
-📩 spam@example.com
-{JSONをそのまま出力}
+🚨 苦情/Complaint spam@example.com
+{SHOW_RAW_JSONがtrueならJSONをそのまま出力}
 ```
 
 ---
