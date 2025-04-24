@@ -1,6 +1,7 @@
 .env.json
 .env.production.json
 samconfig.toml
+template.yaml
 
 
 # Created by https://www.toptal.com/developers/gitignore/api/osx,linux,python,windows,pycharm,visualstudiocode,sam

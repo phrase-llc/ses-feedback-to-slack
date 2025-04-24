@@ -22,7 +22,7 @@ Resources:
         - x86_64
       Environment:
         Variables:
-          SLACK_WEBHOOK_URL: ""
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/XXXX/YYYY/ZZZZ"
           SHOW_RAW_JSON: "false"
 
 Outputs:

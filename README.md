@@ -13,6 +13,7 @@ AWS SAM によって構築されています。
 - バウンスと苦情の通知を判別
 - Slack の Incoming Webhook を使って通知を送信
 - SAM CLI によるローカル実行・テストが可能
+- 環境変数 `SHOW_RAW_JSON` を `true` にすると、SES から受け取った JSON を追加で出力
 
 ---
 
@@ -47,7 +48,21 @@ AWS SAM によって構築されています。
 ```
 
 #### 本番環境
-デプロイ成功後に Lambda 本番環境の環境変数に以下を設定
+
+- `mv template.sample.yaml template.yaml` で `template.yaml` を作成
+- `SLACK_WEBHOOK_URL` と `SHOW_RAW_JSON` を設定
+
+```yaml
+Resources:
+  SesFeedbackFunction:
+    Properties:
+      Environment:
+        Variables:
+          SLACK_WEBHOOK_URL: "https://hooks.slack.com/services/XXXX/YYYY/ZZZZ"
+          SHOW_RAW_JSON: "false"
+```
+
+デプロイ成功後に Lambda 本番環境の環境変数で以下を確認、未設定なら設定が必要です
 
 | 変数名               | 説明                               |
 |-------------------|----------------------------------|
